@@ -11,7 +11,7 @@ router.post(
     '/login',
     passport.authenticate('local', {
         successRedirect: '/principal',
-        failureRedirect: '/cadastro',
+        failureRedirect: '/login',
     }),
     
 );
@@ -21,9 +21,8 @@ router.get('/principal', auth.ensureAuthenticated, loginController.principal);
 router.post('/cadastro', loginController.cadastro);
 
 //busca e postagem
-
-router.get('/busca/:nomeAlbum', auth.ensureAuthenticated, buscaController.busca);
+router.get('/busca', auth.ensureAuthenticated, buscaController.abreTelaBusca);
 router.get('/postagem', auth.ensureAuthenticated, postagemController.abreTelaPostagem);
-//router.post('/postagem', auth.ensureAuthenticated, postagemController.postagem);
+router.post('/postagem', auth.ensureAuthenticated, postagemController.postagem);
 
 module.exports = router;

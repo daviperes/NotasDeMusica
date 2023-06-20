@@ -24,11 +24,14 @@ const getAccessToken = async () => {
 async function searchAlbumByName(albumName) {
   try {
     console.log(accessToken)
-    //const formattedAlbumName = albumName.replace(/\s/g, '%20');
+    const limit = 10;
+    const offset = 0;
     const response = await axios.get('https://api.spotify.com/v1/search', {
       params: {
         type: 'album',
         q: albumName,
+        limit: limit,
+        offset: offset,
       },
       headers: {
         Authorization: `Bearer ${accessToken}`,

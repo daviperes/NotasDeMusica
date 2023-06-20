@@ -10,7 +10,6 @@ const UsuarioSchema = new mongoose.Schema({
     senha: {
         type: "String",
     },
-
 });
 
 module.exports = mongoose.model("Usuario", UsuarioSchema);

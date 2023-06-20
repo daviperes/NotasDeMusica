@@ -1,10 +1,24 @@
 const spotify = require('../../config/spotify.js');
 
-async function busca(req, res){
-    const nomeAlbum = req.params.nomeAlbum;
-    const albuns = await spotify.searchAlbumByName(nomeAlbum);
+// async function abreTelaBusca(req, res){
+//     console.log(req.query);
+//     const nomeAlbum = req.query.nomeAlbum;
+//     let albuns = []
+//     if(nomeAlbum && nomeAlbum.length){
+//         albuns = await spotify.searchAlbumByName(nomeAlbum) || []; 
+//     }
+//     res.render('busca.ejs', {nomeAlbum: nomeAlbum || '', albuns: albuns});
+// }
 
-    res.render('busca.ejs', { albuns: albuns });
-}
-
-module.exports = {busca};
+async function abreTelaBusca(req, res) {
+    const nomeAlbum = req.query.nomeAlbum || '';
+    let albuns = [];
+  
+    if (nomeAlbum && nomeAlbum.length) {
+      albuns = await spotify.searchAlbumByName(nomeAlbum) || [];
+    }
+  
+    res.render('busca.ejs', { nomeAlbum: nomeAlbum, albuns: albuns });
+  }
+  
+module.exports = { abreTelaBusca};

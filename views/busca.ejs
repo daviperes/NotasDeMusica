@@ -6,12 +6,22 @@
   <title>Resultado da busca</title>
 </head>
 <body>
-  <h1>Resultado da busca</h1>
+  <h1>Busca</h1>
+
+  <form action="/busca" method="GET">
+    <input type="text" name="nomeAlbum" value="<%= nomeAlbum || '' %>" placeholder="Digite o nome do álbum">
+    <button type="submit">Buscar</button>
+  </form>
+  
 
   <% for (let album of albuns) { %>
     <div>
       <h2>Artista: <%= album.artists[0].name %></h2>
-      <h3>Álbum: <%= album.name %></h3>
+      <h3>
+          <a href="/postagem?albumId=<%= album.id %>">
+          Álbum: <%= album.name %>
+          </a>
+      </h3>
       <img src="<%= album.images[0].url %>" alt="Capa do álbum">
     </div>
   <% } %>

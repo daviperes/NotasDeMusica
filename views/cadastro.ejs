@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Página de Cadastro</title>
+  <link rel="stylesheet" type="text/css" href="styles/login.css" media="screen" />
+  <title>Cadastro</title>
 </head>
 <body>
-  <h1>Página de Cadastro</h1>
+  
+  <div class="wrapper">
+  <h2>Cadastro</h2>
 
-  <form action="/cadastro" method="post">
-    <label for="tag">Nome de usuário:</label>
-    <input type="text" id="tag" name="tag" required>
+  <% if (error) { %>
+    <div class="error-message">
+      <%= error %>
+    </div>
+  <% } %>
 
-    <label for="email">email:</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="senha">Senha:</label>
-    <input type="password" id="senha" name="senha" required>
-
-    <button type="submit">Cadastrar</button>
-  </form>
+    <form action="/cadastro" method="post">
+      <div class="input-box">
+        <input type="text" placeholder="Nome de usuário" id="tag" name="tag" required>
+      </div> 
+      <div class="input-box">
+        <input type="email" placeholder="Email" id="email" name="email" required>
+      </div>  
+      <div class="input-box">
+        <input type="password" placeholder="Senha" id="senha" name="senha" required>
+      </div> 
+      <button type="submit">Cadastrar</button>
+    </form>
+  </div>
 </body>
 </html>

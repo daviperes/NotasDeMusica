@@ -27,6 +27,7 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.set("view engine", "ejs");
+app.use(express.static('public'));
 
 app.use("/", apiRoute);
 
