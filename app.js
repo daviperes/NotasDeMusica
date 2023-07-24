@@ -33,9 +33,9 @@ app.use("/", apiRoute);
 
 app.get("/", function (req, res) {
   if(req.isAuthenticated()){
-    res.send('Logado')
+    res.redirect('/principal')
   } else{
-    res.render("login.ejs");
+    res.render("login.ejs", {error:""});
   }
 });
 

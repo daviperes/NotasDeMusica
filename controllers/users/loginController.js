@@ -1,10 +1,6 @@
 const bcrypt = require('bcrypt')
 const Usuario = require('../../models/Usuario');
-
-function login(req, res) {
-    // res.redirect('/');
-    res.send('os guri')
-};
+const passport = require('passport');
 
 async function abreTelaCadastro(req, res) {
     res.render("cadastro.ejs", {error:""})
@@ -12,7 +8,6 @@ async function abreTelaCadastro(req, res) {
 
 async function abreTelaLogin(req, res) {
     res.render("login.ejs", {error:""});
-    // res.send('os guri')
 }
 async function principal(req,res){
     res.send('usuário logado');
@@ -49,4 +44,39 @@ async function cadastro(req, res) {
     }
 }
 
-module.exports = { login, cadastro, abreTelaCadastro, abreTelaLogin, principal }
+async function login(req, res, next){
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+          return next(err);
+        }
+        if (!user) {
+          // Defina a mensagem de erro
+          return res.render("login", {error: "E-mail ou senha inválidos."})
+        }
+        req.logIn(user, (err) => {
+          if (err) {
+            return next(err);
+          }
+          return res.redirect('/principal');
+        });
+      })(req, res, next);
+}
+
+
+async function tagUsuarioLogado(req){
+  console.log('caiu aqui');
+
+  // Verifique se req.user está definido e req.user.id tem um valor
+  if (req && req.user && req.user.id) {
+      usuarioId = req.user.id;
+      usuario = await Usuario.findById(usuarioId);
+
+      tagUsuario = usuario.tag;
+
+      return tagUsuario;
+  } else {
+      // Se req.user não estiver definido ou req.user.id estiver vazio, retorne false
+      return false;
+  }
+}
+module.exports = { login, cadastro, abreTelaCadastro, abreTelaLogin, principal, tagUsuarioLogado }

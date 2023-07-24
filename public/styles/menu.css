@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+*{
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
+	box-sizing: border-box;    
+}
+#content{
+	font-size: 20px;
+	color: white;
+	text-transform: capitalize;
+	text-decoration: none;
+	letter-spacing: 1px;
+	padding: 8px 12px;
+}
+nav{
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	background-color: #808080;
+	position: relative;
+	padding: 20px 50px;
+
+}
+nav ol{
+	display: flex;
+	margin: auto 0;
+	list-style: none;
+}
+nav ol li{
+	margin: 0 10px;
+}
+nav ol li a{
+	font-size: 20px;
+	color: white;
+	 text-transform: capitalize;
+	 text-decoration: none;
+	 letter-spacing: 1px;
+	 padding: 8px 12px;
+}
+nav ol li:hover a{
+	background: white;
+	color: black;
+	border-radius: 5px; 
+}
+nav .bar{
+	position: relative;
+	margin: auto;
+	display: none;
+}
+nav .bar span{
+	color: #fff;
+	position: absolute;
+	font-size: 35px;
+}
+input[type="checkbox"]{
+	-webkit-appearance: none;
+	display: none;
+}
+@media screen and (max-width: 1050px){
+	nav{
+		display: block;
+		padding: 0;
+	}
+	nav .icon{
+		display: inline-block;
+		margin: 20px 50px;
+	}
+	nav ol{
+		display: block;
+		background: #808080;
+	}
+	nav ol li{
+		text-align: center;
+		margin: 0;
+		display: none;
+	}
+	nav ol li a{
+		padding: 30px;
+		font-size: 28px;
+		display: block;
+	}
+	nav ol li:hover a{
+		background: #808060;
+		border-radius: 0;
+		color: #fff;
+	}
+	nav .bar{
+		display: block;
+		position: absolute;
+		top: 25px;
+		right: 80px;
+		cursor: pointer;
+	}
+	nav .bar #times{
+		display: none;
+	}
+	#check:checked ~ nav .bar #bars{
+		display: none;
+	}
+	#check:checked ~ nav .bar #times{
+		display: block;
+	}
+	#check:checked ~ nav ol li{
+		display: block;
+	}
+}

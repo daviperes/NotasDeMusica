@@ -1,17 +1,22 @@
-<h1>Nova Postagem</h1>
+<html>
+<head>
+</head>
+<body>
 
-<form method="POST" action="/postagem">
+    <form method="POST" action="/postagem">
     <input type="hidden" name="albumId" value="<%= albumId %>">
     <label for="texto">Texto:</label>
     <textarea name="texto" id="texto" rows="4" cols="50"></textarea>
     <br>
-    <label for="classificacao">Classificação:</label>
-    <select name="classificacao" id="classificacao">
-        <option value="1">1 estrela</option>
-        <option value="2">2 estrelas</option>
-        <option value="3">3 estrelas</option>
-        <option value="4">4 estrelas</option>
-        <option value="5">5 estrelas</option>
+    <label for="nota">Nota:</label>
+    <select name="nota" id="nota">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
     </select>
     <input type="submit" value="Postar">
 </form>
+</body>
+</html>

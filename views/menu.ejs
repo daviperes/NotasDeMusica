@@ -1,0 +1,22 @@
+<input type="checkbox" id="check">
+<nav>
+	<div id="content">
+		<% if (usuarioLogadoTag) { %>
+		  <!-- Exibe a userTag se ela existir -->
+		  <%= usuarioLogadoTag %>
+		<% } else { %>
+		  <!-- Caso a userTag não exista, mostra o link para fazer login -->
+		  <a href="/login">Fazer login</a>
+		<% } %>
+	  </div>
+	<ol>
+		<li><a href="#">Meu perfil</a></li>
+		<li><a href="/busca">Buscar amigos</a></li>
+		<li><a href="#">Criar postagem</a></li>
+		<li><a href="/logout">Sair</a></li>
+	</ol>
+	<label for="check" class="bar">
+		<span class="fas fa-bars" id="bars"></span>
+		<span class="fas fa-times" id="times"></span>
+	</label>
+</nav>

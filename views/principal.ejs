@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Postagens dos Seguidores</title>
+    <link rel="stylesheet" type="text/css" href="styles/menu.css" media="screen" />
+	<script src="https://kit.fontawesome.com/67c66657c7.js"></script>
+</head>
+<body>
+    <%- include('menu') %>
+
+    <h1>Postagens dos Seguidores</h1>
+    
+    <% if (postagens.length > 0) { %>
+        <% postagens.forEach(function(postagem) { %>
+            <div>
+                <h3>Postagem de <%= postagem.usuarioId %></h3>
+                <p><%= postagem.texto %></p>
+            </div>
+            <hr>
+        <% }); %>
+    <% } else { %>
+        <p>Você ainda não segue nenhum usuário.</p>
+    <% } %>
+
+</body>
+</html>

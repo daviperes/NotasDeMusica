@@ -50,4 +50,36 @@ async function searchAlbumByName(albumName) {
   }
 }
 
-module.exports = { searchAlbumByName };
+async function getAlbumCoverById(albumId) {
+  console.log('Album id:', albumId);
+  if(!albumId){
+    return null;
+  }
+  try {
+    const response = await axios.get(`https://api.spotify.com/v1/albums/${albumId}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const album = response.data;
+    if (album && album.images && album.images.length > 0) {
+      return album.images[0].url;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      console.log('Erro de autenticação. Tentando obter novo token de acesso.');
+      await getAccessToken();
+      return getAlbumCoverById(albumId);
+    } else {
+      console.error('Erro ao buscar a capa do álbum:', error.message);
+      return null;
+    }
+  }
+}
+
+module.exports = {
+  searchAlbumByName,
+  getAlbumCoverById,
+};

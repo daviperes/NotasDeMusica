@@ -1,4 +1,4 @@
-const Seguidores = require('../../models/Seguidores');
+const Seguindo = require('../../models/Seguindo');
 const Usuario = require('../../models/Usuario')
 
 async function seguirUsuario(req, res) {
@@ -9,7 +9,7 @@ async function seguirUsuario(req, res) {
     const usuarioEncontrado = await Usuario.findOne({tag : tag})
     const usuarioSeguindoId = usuarioEncontrado._id;
 
-    const novaRelacao = new Seguidores({
+    const novaRelacao = new Seguindo({
       usuario: usuarioId,
       seguindo: usuarioSeguindoId
     });
@@ -20,4 +20,38 @@ async function seguirUsuario(req, res) {
   }
 }
 
-module.exports = {seguirUsuario};
+async function deixarDeSeguirUsuario(req, res) {
+  const usuarioId = req.user.id;
+  const tag = req.params.tag;
+
+  try {
+    const usuarioEncontrado = await Usuario.findOne({ tag: tag });
+    const usuarioSeguindoId = usuarioEncontrado._id;
+
+    // Encontre e remova o registro de Seguindo correspondente
+    await Seguindo.findOneAndRemove({ usuario: usuarioId, seguindo: usuarioSeguindoId });
+
+    console.log('Usuário deixou de seguir com sucesso!');
+  } catch (error) {
+    console.error('Erro ao deixar de seguir usuário:', error);
+  }
+}
+async function seguindo(req, res){
+  const usuarioId = req.user.id;
+  const tag = req.params.tag;
+
+  try {
+    const usuarioEncontrado = await Usuario.findOne({ tag: tag });
+    const usuarioSeguindoId = usuarioEncontrado._id;
+
+    // Encontre e remova o registro de Seguindo correspondente
+    const seguindo = await Seguindo.findOne({ usuario: usuarioId, seguindo: usuarioSeguindoId });
+    console.log('Seguindo:', seguindo);
+
+    return seguindo;
+  } catch (error) {
+    console.error('Erro:', error);
+  }
+}
+
+module.exports = {seguirUsuario, deixarDeSeguirUsuario, seguindo};

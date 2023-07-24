@@ -4,26 +4,36 @@
 <html>
 <head>
   <title>Resultado da busca</title>
+  <link rel="stylesheet" type="text/css" href="styles/busca.css"> <!-- Substitua o caminho pelo local do arquivo CSS estilizado -->
+  <link rel="stylesheet" type="text/css" href="styles/menu.css"> 
 </head>
 <body>
-  <h1>Busca</h1>
-
-  <form action="/busca" method="GET">
-    <input type="text" name="nomeAlbum" value="<%= nomeAlbum || '' %>" placeholder="Digite o nome do álbum">
-    <button type="submit">Buscar</button>
-  </form>
-  
-
-  <% for (let album of albuns) { %>
-    <div>
-      <h2>Artista: <%= album.artists[0].name %></h2>
-      <h3>
-          <a href="/postagem?albumId=<%= album.id %>">
-          Álbum: <%= album.name %>
-          </a>
-      </h3>
-      <img src="<%= album.images[0].url %>" alt="Capa do álbum">
+  <body>
+    <%- include('menu') %>
+    <div class="wrapper">
+      <h2>Busca</h2>
+      <form action="/busca" method="GET">
+        <div class="input-box">
+          <input type="text" name="nomeAlbum" value="<%= nomeAlbum || '' %>" placeholder="Digite o nome do álbum">
+        </div>
+        <button type="submit">Buscar</button>
+      </form>
     </div>
-  <% } %>
-</body>
-</html>
+    
+    <div class="albums-container">
+      <% for (let album of albuns) { %>
+        <div class="album-card">
+          <img class="album-image" src="<%= album.images[0].url %>" alt="Capa do álbum">
+          <div class="album-info">
+            <h2>Artista: <%= album.artists[0].name %></h2>
+            <h3>
+                <a href="/postagem?albumId=<%= album.id %>">
+                Álbum: <%= album.name %>
+                </a>
+            </h3>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </body>
+  </html>

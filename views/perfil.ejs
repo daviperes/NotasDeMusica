@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Postagens do Usuário</title>
+  <link rel="stylesheet" type="text/css" href="styles/menu.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="styles/card.css" media="screen" />
+</head>
+<body>
+  <%- include('menu') %>
+  <div class="profile-info">
+    <h1><%= userTag %></h1> <!-- Substitua "Nome do Usuário" pelo nome real do usuário -->
+    <% if (seguindoUsuario) { %>
+      <a href="/deixarDeSeguir">Deixar de Seguir</a>
+    <% } else { %>
+      <a href="/seguir">Seguir</a>
+    <% } %>
+  </div>
+  </div>
+  <div class="card-container"> <!-- Vamos adicionar uma div para envolver os cards -->
+    <% postagens.forEach(function(postagem) { %>
+      <div class="card"> <!-- Cada postagem será um card individual -->
+        <div class="card-image">
+          <img src="<%= postagem.imageUrl %>" alt="Imagem do Álbum">
+        </div>
+        <div class="texto"><%= postagem.texto %></div>
+        <div class="nota">Nota: <%= postagem.nota %></div>
+      </div>
+    <% }); %>
+  </div>
+</body>
+</html>
